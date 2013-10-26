@@ -1,0 +1,42 @@
+\documentclass[11pt]{article}
+
+\usepackage{shadedgauss}
+
+\begin{document}
+
+%\pgfplotsset{every axis/.append style={font=\tiny}}
+
+\title{Shaded Gauss}
+\author{Kevin Pluck\\kevinjpluck@gmail.com}
+\date{\vspace{-5ex}} %Sticking in negative space removes gap for date in title!
+\maketitle
+
+\section{Usage}
+\begin{verbatim}
+\midshadedgauss{mean}{std.dev}{xmin}{xmax}{start of shaded area}{end of shaded area}
+\leftshadedgauss{mean}{std.dev}{xmin}{xmax}{end of shaded area}
+\rightshadedgauss{mean}{std.dev}{xmin}{xmax}{start of shaded area}
+
+\end{verbatim}
+
+\section{Examples}
+A good rule of thumb for xmin and xmax is mean +/- 2.5*std.dev.
+\subsection{Left shaded gauss}
+	\leftshadedgauss{137}{15}{100}{175}{145}
+\begin{verbatim}
+	\leftshadedgauss{137}{15}{100}{175}{145}
+\end{verbatim}
+\subsection{Right shaded gauss}
+	\rightshadedgauss{137}{15}{100}{175}{129}
+\begin{verbatim}
+	\rightshadedgauss{137}{15}{100}{175}{129}
+\end{verbatim}
+\subsection{Mid shaded gauss}
+	\midshadedgauss{137}{15}{100}{175}{129}{145}
+\begin{verbatim}
+	\midshadedgauss{137}{15}{100}{175}{129}{145}
+\end{verbatim}
+
+
+
+\end{document}  

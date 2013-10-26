@@ -1,0 +1,77 @@
+\ProvidesPackage{shadedgauss}
+
+% This package renders shaded gaussian curves.
+% by Kevin Pluck kevinjpluck@gmail.com
+
+% Usage:
+% \midshadedgauss{mean}{std.dev}{xmin}{xmax}{start of shaded area}{end of shaded area}
+% \leftshadedgauss{mean}{std.dev}{xmin}{xmax}{end of shaded area}
+% \rightshadedgauss{mean}{std.dev}{xmin}{xmax}{start of shaded area}
+
+% A good rule of thumb for xmin and xmax is mean +/- 2.5*std.dev.
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfmathdeclarefunction{gauss}{2}{%
+	  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+	}
+	
+	\newcommand{\midshadedgauss}[6]{
+		\begin{center}
+			\begin{tikzpicture}
+				\begin{axis}[
+					domain=#3:#4, samples=100,
+					axis y line = none,
+					axis x line* = bottom,
+					height=3cm, width=7.2cm, font=\tiny,
+					xtick={#1,#5,#6},ytick=\empty,
+					enlargelimits=false, axis on top,
+					grid = major
+				  ]
+				  \addplot [fill=cyan!20, draw=none, domain=#5:#6] {gauss(#1,#2)} \closedcycle;
+				  \addplot [very thick,cyan!50!black] {gauss(#1,#2)};
+				\end{axis}
+			\end{tikzpicture}
+		\end{center}
+	}
+	
+	\newcommand{\leftshadedgauss}[5]{
+		\begin{center}
+			\begin{tikzpicture}
+				\begin{axis}[
+					domain=#3:#4, samples=100,
+					axis y line = none,
+					axis x line* = bottom,
+					height=3cm, width=7.2cm, font=\tiny,
+					xtick={#1,#5},ytick=\empty,
+					enlargelimits=false, axis on top,
+					grid = major
+				  ]
+				  \addplot [fill=cyan!20, draw=none, domain=#3:#5] {gauss(#1,#2)} \closedcycle;
+				  \addplot [very thick,cyan!50!black] {gauss(#1,#2)};
+				\end{axis}
+			\end{tikzpicture}
+		\end{center}
+
+	}
+	
+	\newcommand{\rightshadedgauss}[5]{
+		\begin{center}
+			\begin{tikzpicture}
+				\begin{axis}[
+					domain=#3:#4, samples=100,
+					axis y line = none,
+					axis x line* = bottom,
+					height=3cm, width=7.2cm, font=\tiny,
+					xtick={#1,#5},ytick=\empty,
+					enlargelimits=false, axis on top,
+					grid = major
+				  ]
+				  \addplot [fill=cyan!20, draw=none, domain=#5:#4] {gauss(#1,#2)} \closedcycle;
+				  \addplot [very thick,cyan!50!black] {gauss(#1,#2)};
+				\end{axis}
+			\end{tikzpicture}
+		\end{center}
+
+	}
