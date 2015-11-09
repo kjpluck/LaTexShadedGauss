@@ -3,6 +3,7 @@ LaTex Shaded Gauss
 
 A LaTeX style file that plots a shaded gaussian curve.
 
+<img src="LeftShadedGauss.png">
 
 This package renders shaded gaussian curves.
 
